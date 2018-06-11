@@ -7,52 +7,55 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
+    var function: String = ""
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         setOnClickListenerForCalculate()
+        setOnClickListenerForFunction()
+
     }
 
-    private fun calculateFunction():Double{
+    private fun calculateFunction(): Double {
         var number1: Double = (firstNum.getText().toString().toDouble())
         var number2: Double = (secondNum.getText().toString().toDouble())
         var total: Double = 0.0
-        var function = setOnClickListenerForFunction()
 
-        when (function){
+        when (function) {
+
             "/" -> total = (number1 / number2)
-            "*" -> total = (number1*number2)
-            "+" -> total = (number1+number2)
-            "-" -> total = (number1-number2)
+            "*" -> total = (number1 * number2)
+            "+"-> total = (number1 + number2)
+            "-"-> total = (number1 - number2)
         }
+
         return total
     }
 
-    private fun setOnClickListenerForCalculate(){
+    private fun setOnClickListenerForCalculate() {
         btnCalculate.setOnClickListener {
-            val intent = Intent (this, FunctionResultsScreen::class.java)
-            intent.putExtra("FunctionResult",calculateFunction())
+            val intent = Intent(this, FunctionResultsScreen::class.java)
+            intent.putExtra("FunctionResult", calculateFunction())
             startActivity(intent)
         }
     }
 
-    private fun setOnClickListenerForFunction(): String{
-        var function: String = ""
+    fun setOnClickListenerForFunction(){
 
-        btnDiv.setOnClickListener{
+        btnDiv.setOnClickListener {
             function = "/"
         }
-        btnMult.setOnClickListener{
+        btnMult.setOnClickListener {
             function = "*"
         }
-        btnPlus.setOnClickListener{
+        btnPlus.setOnClickListener {
             function = "+"
         }
-        btnMin.setOnClickListener{
+        btnMin.setOnClickListener {
             function = "-"
         }
 
-        return function
     }
 }
